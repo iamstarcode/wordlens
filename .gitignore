@@ -11,7 +11,7 @@
 
 # production
 /build
-/dist/output.css
+3/dist/output.css
 
 # misc
 .DS_Store
