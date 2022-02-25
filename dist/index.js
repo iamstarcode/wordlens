@@ -10,8 +10,7 @@ const meaningDiv = document.getElementById('meaningdiv')
 const toggle = document.getElementById('toggle')
 const error = document.getElementById('error')
 const skeleton = document.getElementById('skeleton')
-const audioDiv = document.getElementById('audio')
-
+const audiobtn = document.getElementById('audiobtn')
 const audio = document.getElementById('audio')
 
 handleThemeToggle()
@@ -70,10 +69,17 @@ async function handleSubmit(e) {
     if (item.audio?.length > 0) return true
   })
 
-  audio.setAttribute('src', getPhoneticAudio.audio)
+  if(getPhoneticAudio !=undefined){
+    audio.setAttribute('src', getPhoneticAudio?.audio)
+    audiobtn.style.display ="block"
+  }
+  else{
+    audiobtn.style.display ="none"
+  }
+
 
   word.textContent = wordInput.value
-  phoneticText.textContent = getPhoneticText.text
+  phoneticText.textContent = getPhoneticText?.text
 
   let meaningsString = ''
   data[0]?.meanings.map((item) => {
@@ -84,7 +90,7 @@ async function handleSubmit(e) {
 
 function meaningsHtml(meaning) {
   let others = ' '
-  meaning.definitions.map((item) => (others += othersHtml(item)))
+  meaning.definitions?.map((item) => (others += othersHtml(item)))
   let html = `<div class="block">
                  <header class="text-sm md:text-base font-semibold capitalize">${meaning.partOfSpeech}</header>
                  <ul class=" list-decimal text-sm md:text-base px-5">
@@ -97,23 +103,23 @@ function meaningsHtml(meaning) {
 }
 
 function othersHtml(definition) {
-  definitionHtml = `<li  class="leading-5 p-2"> ${definition.definition}<ul>`
+  definitionHtml = `<li  class="leading-5 p-2"> ${definition?.definition}<ul>`
   let exampleHtml = ''
   let synonymsHtml = ''
   let antonymsHtml = ''
 
   if (definition.example != undefined) {
-    exampleHtml += `<li class="italic font-normal text-muted">sentence: “${definition.example}"</li>`
+    exampleHtml += `<li class="italic font-normal text-muted">sentence: “${definition?.example}"</li>`
   }
   if (definition.synonyms != undefined) {
     synonymsHtml += `<li class="font-medium">Synonyms: “${flatArray(
-      definition.synonyms,
+      definition?.synonyms,
     )}”</li>`
   }
 
   if (definition.antonyms != undefined) {
     synonymsHtml += `<li class="font-medium">Synonyms: “${flatArray(
-      definition.antonyms,
+      definition?.antonyms,
     )}”</li>`
   }
 
