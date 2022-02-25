@@ -118,7 +118,7 @@ function othersHtml(definition) {
   }
 
   if (definition.antonyms != undefined) {
-    synonymsHtml += `<li class="font-medium">Synonyms: “${flatArray(
+    antonymsHtml += `<li class="font-medium">Antonyms: “${flatArray(
       definition?.antonyms,
     )}”</li>`
   }
