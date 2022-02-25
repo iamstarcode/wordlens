@@ -14,14 +14,12 @@ const audioDiv = document.getElementById('audio')
 
 const audio = document.getElementById('audio')
 
-
 handleThemeToggle()
 
 async function fecthWord(word) {
-
-  skeleton.style.display = "flex"
-  error.style.display = "none"
-  wordSection.style.display = "none"
+  skeleton.style.display = 'flex'
+  error.style.display = 'none'
+  wordSection.style.display = 'none'
 
   try {
     let res = await fetch(
@@ -29,18 +27,18 @@ async function fecthWord(word) {
     )
 
     if (res.ok == false) {
-      skeleton.style.display = "none"
-      error.style.display = "flex"
-      wordSection.style.display = "block"
-      meaningsDiv.style.display = "none"
-      meaningDiv.style.display = "none"
+      skeleton.style.display = 'none'
+      error.style.display = 'flex'
+      wordSection.style.display = 'block'
+      meaningsDiv.style.display = 'none'
+      meaningDiv.style.display = 'none'
       return false
     } else {
-        skeleton.style.display = "none"
-        error.style.display = "none"
-        wordSection.style.display = "block"
-        meaningsDiv.style.display = "block"
-      meaningDiv.style.display = "block"
+      skeleton.style.display = 'none'
+      error.style.display = 'none'
+      wordSection.style.display = 'block'
+      meaningsDiv.style.display = 'block'
+      meaningDiv.style.display = 'block'
       return await res.json()
     }
   } catch (error) {}
@@ -93,7 +91,7 @@ function meaningsHtml(meaning) {
                  ${others}
                  </ul>
                  </div>`
-  
+
   html = html.trim()
   return html
 }
@@ -103,33 +101,32 @@ function othersHtml(definition) {
   let exampleHtml = ''
   let synonymsHtml = ''
   let antonymsHtml = ''
-  exampleHtml +=
-    definition.example == undefined
-      ? ' '
-      : `<li class="italic font-normal text-muted">sentence: “${definition.example}"</li>`
-  synonymsHtml +=
-    definition.synonyms == undefined
-      ? ' '
-      : `<li class="font-medium">Synonyms: “${flatArray(
-          definition.synonyms,
-        )}”</li>`
-  antonymsHtml +=
-    definition.antonyms == undefined
-      ? ' '
-      : `<li class="font-medium">Synonyms: “${flatArray(
-          definition.antonyms,
-        )}”</li>`
+
+  if (definition.example != undefined) {
+    exampleHtml += `<li class="italic font-normal text-muted">sentence: “${definition.example}"</li>`
+  }
+  if (definition.synonyms != undefined) {
+    synonymsHtml += `<li class="font-medium">Synonyms: “${flatArray(
+      definition.synonyms,
+    )}”</li>`
+  }
+
+  if (definition.antonyms != undefined) {
+    synonymsHtml += `<li class="font-medium">Synonyms: “${flatArray(
+      definition.antonyms,
+    )}”</li>`
+  }
 
   definitionHtml += exampleHtml + synonymsHtml + antonymsHtml + '</ul></li>'
   return definitionHtml
 }
 
 function flatArray(arr) {
-  let word = ''
-  arr.map((item) => (word = word + item + ', '))
-  let i = word.lastIndexOf(', ')
-  word = word.substring(0, i)
-  return word.trim()
+  if (arr != undefined) {
+    return arr.reduce((pv, cv) => {
+      return pv + ', ' + cv
+    })
+  }
 }
 function getTheme() {
   let theme = localStorage.getItem('theme')

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production npm run dev",
-    "dev" : "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "buildprod": "NODE_ENV=production npm run dev",
+    "build" : "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "author": "",
   "license": "ISC",
