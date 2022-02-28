@@ -61,11 +61,11 @@ async function handleSubmit(e) {
     return
   }
 
-  let getPhoneticText = data[0]?.phonetics.find((item, index) => {
+  let getPhoneticText = data[0]?.phonetics.find((item) => {
     if (item.text?.length > 0) return true
   })
 
-  let getPhoneticAudio = data[0]?.phonetics.find((item, index) => {
+  let getPhoneticAudio = data[0]?.phonetics.find((item) => {
     if (item.audio?.length > 0) return true
   })
 
@@ -111,13 +111,13 @@ function othersHtml(definition) {
   if (definition.example != undefined) {
     exampleHtml += `<li class="italic font-normal text-muted">sentence: “${definition?.example}"</li>`
   }
-  if (definition.synonyms != undefined) {
+  if (definition.synonyms != undefined && definition.synonyms.length > 0) {
     synonymsHtml += `<li class="font-medium">Synonyms: “${flatArray(
       definition?.synonyms,
     )}”</li>`
   }
 
-  if (definition.antonyms != undefined) {
+  if (definition.antonyms != undefined && definition.antonyms.length > 0) {
     antonymsHtml += `<li class="font-medium">Antonyms: “${flatArray(
       definition?.antonyms,
     )}”</li>`
@@ -128,11 +128,9 @@ function othersHtml(definition) {
 }
 
 function flatArray(arr) {
-  if (arr != undefined) {
     return arr.reduce((pv, cv) => {
       return pv + ', ' + cv
     })
-  }
 }
 function getTheme() {
   let theme = localStorage.getItem('theme')
