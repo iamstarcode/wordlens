@@ -4,8 +4,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout source code from version control
-               
+                dir('dist/') {
+                    // Run commands in the specified directory
+                    sh 'echo In Dist folder install'
+                    
+                }
             }
         }
         stage('Build') {
