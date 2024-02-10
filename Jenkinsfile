@@ -2,16 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                dir('dist/') {
-                    // Run commands in the specified directory
-                    sh 'echo In Dist folder install'
-                    //
-                    
-                }
-            }
-        }
        
         stage('Deploy') {
             steps {
