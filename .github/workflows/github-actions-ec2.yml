@@ -2,7 +2,17 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
+    name: deploy to EC2
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
